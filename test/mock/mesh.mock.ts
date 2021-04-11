@@ -1,6 +1,9 @@
 
 export class EmailServiceMock {
-    sendEmail() {
+    constructor() {}
+
+    sendEmail(data) {
         console.log('Sending email');
+        return Promise.resolve();
     }
 }
