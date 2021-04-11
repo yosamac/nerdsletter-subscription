@@ -1,6 +1,6 @@
-# Public Service 
+# Subscription Service 
 
-API gateway
+ Micro-service that take care of management of subscriptions.
 
 ## Getting Started
 
@@ -16,8 +16,8 @@ These instructions will get you a copy of the project up and running on your loc
 ### Download and install dependencies
 
 ```shell
-$ git clone https://github.com/yosama/nerdsletter.git
-$ cd nerdsletter/packages/public
+$ git clone https://github.com/yosamac/nerdsletter-subscription.git
+$ cd nerdsletter-subscription
 $ npm install
 ```
 
@@ -27,28 +27,22 @@ $ npm install
 npm start start:dev
 ```
 
-## API v1 info
-
-### Swagger
-
-The API can be used with the path: 
-[API V1](http://localhost:3000/api)
-
-
 ## General configuration
 
 ### Environment variables
 
-| Name                    | Description                                | Default                      |
-| ------------------------| ------------------------------------------ | -----------------------------|
-| API_HOST                | API host                                   | `0.0.0.0`                    |
-| API_PORT                | API port                                   | `3000`                       |
-| ENDPOINT_ROUTE          | Global URL prefix                          | NO DEFAULT VALUE             |
-| NODE_ENV                | Production or development mode             | `development`                |
-| LOGGING_LEVEL           | Logs level                                 | `INFO`                       |
-| **Mesh section of other services**                                                                |||
-| SUBSCRIPTION_MESH_HOST  | SUBSCRIPTION TCP host                      | `0.0.0.0`                    |
-| SUBSCRIPTION_MESH_PORT  | SUBSCRIPTION TCP port                      | `4000`                       |
+| Name                    | Description                                | Default                                      |
+| ------------------------| ------------------------------------------ | ---------------------------------------------|
+| MESH_HOST                | Mesh TCP host                             | `0.0.0.0`                                    |
+| MESH_PORT                | Mesh TCP port                             | `4001`                                       |
+| ENDPOINT_ROUTE          | Global URL prefix                          | NO DEFAULT VALUE                             |
+| NODE_ENV                | Production or development mode             | `development`                                |
+| LOGGING_LEVEL           | Logs level                                 | `INFO`                                       |
+| **Mesh section of other services**                                                                                |||
+| EMAIL_MESH_HOST         | EMAIL SERVICE TCP host                     | `0.0.0.0`                                    |
+| EMAIL_MESH_PORT         | EMAIL SERVICE TCP port                     | `4002`                                       |
+| **Database section**                                                                                              |||
+| MONGODB_URI             | Connection database                        | `mongodb://localhostnerdsletter_subscription`|
 
 
 ## Running the tests
@@ -57,12 +51,6 @@ The API can be used with the path:
 
 ```shell
 npm run test:unit
-```
-
-### E2E tests
-
-```shell
-npm run test:e2e
 ```
 
 ### Integration tests
@@ -77,7 +65,7 @@ npm run test
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.org/yosama/nerdsletter/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.org/yosama/nerdsletter-subscription/tags).
 
 
 ### Generate Release
@@ -98,7 +86,7 @@ npm run build:pro-image
 ```
 ### Docker compose
 ```shell
-docker-compose up nerdsletter
+docker-compose up nerdsletter-subscription
 ```
 
 ### Docker hub repository
