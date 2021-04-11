@@ -47,4 +47,13 @@ export class SubscriptionService {
             })
         );
     }
+
+    getAllSubscriptions(): Observable<any> {
+        this.logger.debug('Getting all subscriptions ');
+
+        const res = from (this.daoService.findAll());
+        return res.pipe(catchError(handleError(this.logger)));
+    }
+
+
 }

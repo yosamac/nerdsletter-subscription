@@ -19,8 +19,12 @@ export class DaoService {
         private readonly subscriptionModel: Model<SubscriptionDocument>,
     ) {}
 
-    create(data: Subscription): Promise<Subscription>{
+    create(data: Subscription): Promise<Subscription> {
         const createdSubscription = new this.subscriptionModel(data);
         return createdSubscription.save();
+    }
+
+    findAll(): Promise<Subscription[]> {
+        return this.subscriptionModel.find().exec();
     }
 }

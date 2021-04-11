@@ -24,4 +24,8 @@ export class DaoServiceMock {
         }
         return of(validSubscription);
     }
+
+    findAll() {
+        return of([validSubscription]);
+    }
 }

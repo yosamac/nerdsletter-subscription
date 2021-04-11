@@ -91,18 +91,18 @@ describe('subscriptionService', () => {
         });
     });
 
-    // describe('#getAllSubscriptions', () => {
+    describe('#getAllSubscriptions', () => {
 
-    //     it('Should return all subscriptions', (done) => {
+        it('Should return all subscriptions', (done) => {
 
-    //         const res = subscriptionService.getAllSubscriptions();
+            const res = subscriptionService.getAllSubscriptions();
 
-    //         res.subscribe(subscription => {
-    //             expect(subscription).toBeInstanceOf(Array);
-    //             done();
-    //         });
-    //     });
-    // });
+            res.subscribe(subscription => {
+                expect(subscription).toBeInstanceOf(Array);
+                done();
+            });
+        });
+    });
 
     // describe('#getSubscription', () => {
 

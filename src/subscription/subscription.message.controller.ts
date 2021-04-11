@@ -16,4 +16,9 @@ export class SubscriptionMessageController {
     createSubscription(data: any): Observable<any> {
         return this.subscriptionService.createSubscription(data);
     }
+
+    @MessagePattern({ cmd: 'getAllSubscriptions' })
+    getAllSubscriptions(): Observable<any> {
+        return this.subscriptionService.getAllSubscriptions();
+    }
 }
