@@ -15,6 +15,7 @@ import {
     DaoServiceMock,
     emailRegistered,
     validNewsletterId,
+    validSubscriptionId
 } from '../mock/dao.mock';
 import {
     EmailMeshService
@@ -104,33 +105,33 @@ describe('subscriptionService', () => {
         });
     });
 
-    // describe('#getSubscription', () => {
+    describe('#getSubscription', () => {
 
-    //     it('Should return a subscription', (done) => {
+        it('Should return a subscription', (done) => {
 
-    //         const res = subscriptionService.getSubscription(validSubscriptionId);
+            const res = subscriptionService.getSubscription(validSubscriptionId);
 
-    //         res.subscribe(subscription => {
-    //             expect(subscription.id).toEqual(validSubscriptionId);
-    //             done();
-    //         });
-    //     });
+            res.subscribe(subscription => {
+                expect(subscription.id).toEqual(validSubscriptionId);
+                done();
+            });
+        });
 
-    //     it('Should throw a service exception 404', (done) => {
+        it('Should throw a service exception 404', (done) => {
 
-    //         const invalidId = 'invalidId';
+            const invalidId = 'invalidId';
 
-    //         const res = subscriptionService.getSubscription(invalidId);
+            const res = subscriptionService.getSubscription(invalidId);
 
-    //         res.pipe(
-    //             catchError(err => of(err))
-    //         ).subscribe(ex => {
-    //             expect(ex).toBeInstanceOf(ServiceException);
-    //             expect(ex.getStatus()).toBe(HttpStatus.NOT_FOUND);
-    //             done();
-    //         });
-    //     });
-    // });
+            res.pipe(
+                catchError(err => of(err))
+            ).subscribe(ex => {
+                expect(ex).toBeInstanceOf(ServiceException);
+                expect(ex.status).toBe(ServiceExceptionStatus.NOT_FOUND);
+                done();
+            });
+        });
+    });
 
     // describe('#cancelSubscription', () => {
 

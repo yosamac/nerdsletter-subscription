@@ -5,13 +5,6 @@ import { Model } from 'mongoose';
 
 import { Subscription, SubscriptionDocument } from '../dao/subscription.schema';
 
-export enum ServiceLoggerLevel {
-    DEBUG = 'DEBUG',
-    INFO = 'INFO',
-    ERROR = 'ERROR',
-    NONE = 'NONE'
-}
-
 @Injectable()
 export class DaoService {
     constructor(
@@ -26,5 +19,9 @@ export class DaoService {
 
     findAll(): Promise<Subscription[]> {
         return this.subscriptionModel.find().exec();
+    }
+
+    findOne(id:string): Promise<Subscription> {
+        return this.subscriptionModel.findById(id).exec();
     }
 }

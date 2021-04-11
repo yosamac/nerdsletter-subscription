@@ -4,11 +4,6 @@ import { Catch,
 import { RpcException } from '@nestjs/microservices';
 import { throwError, Observable } from 'rxjs';
 
-type ServiceTCPResponse = {
-    code: number,
-    message: string,
-    timestamp
-};
 
 @Catch(RpcException)
 export class ServiceExceptionFilter implements RpcExceptionFilter<RpcException> {

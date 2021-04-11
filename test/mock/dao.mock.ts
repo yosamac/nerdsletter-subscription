@@ -28,4 +28,10 @@ export class DaoServiceMock {
     findAll() {
         return of([validSubscription]);
     }
+
+    findOne(id: string) {
+        return id == validSubscriptionId
+            ? of(validSubscription)
+            : of(null);
+    }
 }

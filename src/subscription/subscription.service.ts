@@ -23,7 +23,7 @@ export class SubscriptionService {
     createSubscription(
         newSubscription: any
     ): Observable<any> {
-        this.logger.debug(`Creating new subscription for ${newSubscription.email}`);
+        this.logger.info(`Creating new subscription for ${newSubscription.email}`);
 
         const res = from (this.daoService.create(
             toSubscription(newSubscription)
@@ -48,12 +48,36 @@ export class SubscriptionService {
         );
     }
 
-    getAllSubscriptions(): Observable<any> {
-        this.logger.debug('Getting all subscriptions ');
+    getAllSubscriptions(): Observable<any[]> {
+        this.logger.info('Getting all subscriptions ');
 
         const res = from (this.daoService.findAll());
-        return res.pipe(catchError(handleError(this.logger)));
+        return res.pipe(
+            map(list => list.map(toSubscriptionDTO)),
+            catchError(handleError(this.logger))
+        );
     }
 
-
+    getSubscription(id: string): Observable<any> {
+        this.logger.info(`Getting subscription: ${id}`);
+        const res = from (this.daoService.findOne(id));
+        return res.pipe(
+            map(doc => {
+                if (!doc) {
+                    return handleError(this.logger)({
+                        code: ServiceExceptionStatus.NOT_FOUND,
+                        details: 'Subscription not found'
+                    });
+                }
+                return toSubscriptionDTO(doc);
+            }),
+            catchError(err => {
+                this.logger.error(err.message);
+                return handleError(this.logger)({
+                    code: ServiceExceptionStatus.NOT_FOUND,
+                    details: 'Subscription not found'
+                });
+            })
+        );
+    }
 }

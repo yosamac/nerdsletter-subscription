@@ -5,7 +5,7 @@ import { GENDER } from '../../../types';
 
 const validOptions = Object.keys(GENDER);
 
-export const CreateSubscriptionSchema = Joi.object({
+const CreateSubscriptionSchema = Joi.object({
     email: Joi.string().required().email({ minDomainSegments: 2 })
         .label('email').description('User email'),
     dateOfBirth: Joi.string().required()
