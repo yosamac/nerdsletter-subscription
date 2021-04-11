@@ -3,19 +3,19 @@ import { Document } from 'mongoose';
 
 export type SubscriptionDocument = Subscription & Document;
 
-@Schema()
+@Schema({ timestamps: true, versionKey: false })
 export class Subscription {
-  @Prop()
+  @Prop({ required: true, unique: true, index: true })
   email: string;
-  @Prop()
+  @Prop({ required: true })
   dateOfBirth: number;
-  @Prop()
+  @Prop({ required: true })
   flagForConsent: boolean;
-  @Prop()
+  @Prop({ required: true })
   newsletterId: string;
   @Prop()
   firstName: string;
-  @Prop()
+  @Prop({ enum: ['MALE', 'FEMALE'] })
   gender: string;
 }
 

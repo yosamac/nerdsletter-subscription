@@ -19,7 +19,6 @@
     "test:unit": "jest --config ./test/unit.json",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:e2e": "jest --config ./test/e2e/jest-e2e.json",
     "build:dev-image": "docker build . -t ${npm_package_name}:${npm_package_version}-$(git rev-parse --short HEAD) --no-cache",
     "build:pro-image": "docker build . -t ${npm_package_name}:${npm_package_version} --no-cache",
     "cm": "git-cz",

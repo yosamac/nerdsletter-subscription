@@ -54,7 +54,7 @@ export class ServiceLogger extends Logger implements LoggerService {
     errors(...messages: any[]) {
         if (this.level == ServiceLoggerLevel.NONE) return;
 
-        this.errors(this.parseMessage(messages));
+        this.error(this.parseMessage(messages));
     }
 
     private parseMessage(messages: any[]) {

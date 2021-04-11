@@ -9,5 +9,8 @@ export default () => ({
       host: process.env.EMAIL_MESH_HOST || '0.0.0.0',
       port: parseInt(process.env.EMAIL_MESH_PORT, 10) || 4002
     },
+  },
+  database: {
+    uri: process.env.MONGODB_URI || 'mongodb://localhost/nerdsletter_subscription'
   }
 });

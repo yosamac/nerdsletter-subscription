@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Observable, from } from 'rxjs';
-import { catchError, map , } from 'rxjs/operators';
-
+import { catchError, map } from 'rxjs/operators';
 
 import { ServiceLogger } from '../logger/logger.service';
 import { EmailMeshService } from '../mesh/email';
 import { DaoService } from '../dao/dao.service';
 import { handleError } from '../common/helper';
-
+import { ServiceExceptionStatus } from '../common/service.exception';
+import { toSubscription, toSubscriptionDTO } from './subscription.mapper';
 
 @Injectable()
 export class SubscriptionService {
@@ -24,15 +24,27 @@ export class SubscriptionService {
         newSubscription: any
     ): Observable<any> {
         this.logger.debug(`Creating new subscription for ${newSubscription.email}`);
-        const res = from (
-            this.daoService.create(newSubscription)
-        );
+
+        const res = from (this.daoService.create(
+            toSubscription(newSubscription)
+        ));
 
         return res.pipe(
             map(newSubscription => {
-                return newSubscription;
+
+                this.emailService.sendEmail(newSubscription);
+
+                return toSubscriptionDTO(newSubscription);
             }),
-            catchError(handleError(this.logger))
+            catchError(err => {
+                if (err.code === 11000) {
+                    return handleError(this.logger)({
+                        code: ServiceExceptionStatus.ALREADY_EXISTS,
+                        details: 'Email already exists'
+                    });
+                }
+                return handleError(this.logger)(err);
+            })
         );
     }
 }
