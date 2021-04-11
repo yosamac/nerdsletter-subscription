@@ -1,0 +1,108 @@
+{
+  "name": "nerdsletter-subscription",
+  "version": "1.0.0",
+  "description": "Nerdsletter-subscription is a micro-service that take care of management of subscriptions.",
+  "author": "Yosnier Samon <yosnier.samon@mediktiv.com>",
+  "license": "ISC",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "npm run lint:fix",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "lint": "eslint '{src,apps,libs,test}/**/*.ts'",
+    "lint:fix": "eslint --cache '{src,apps,libs,test}/**/*.ts' --fix",
+    "lint:report": "eslint '{src,test}/**/*.ts' -f json > eslint-report.json",
+    "pretest": "npm run build",
+    "test": "jest",
+    "test:unit": "jest --config ./test/unit.json",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:e2e": "jest --config ./test/e2e/jest-e2e.json",
+    "build:dev-image": "docker build . -t ${npm_package_name}:${npm_package_version}-$(git rev-parse --short HEAD) --no-cache",
+    "build:pro-image": "docker build . -t ${npm_package_name}:${npm_package_version} --no-cache",
+    "cm": "git-cz",
+    "commitmsg": "validate-commit-msg",
+    "release": "standard-version",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "@nestjs/common": "^7.6.5",
+    "@nestjs/config": "^0.4.0",
+    "@nestjs/core": "^7.6.5",
+    "@nestjs/microservices": "^7.6.15",
+    "@nestjs/mongoose": "^7.2.4",
+    "@nestjs/platform-express": "^7.6.5",
+    "joi": "^17.4.0",
+    "mongoose": "^5.12.3",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.0",
+    "rxjs": "^6.5.5",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^7.5.4",
+    "@nestjs/schematics": "^7.2.6",
+    "@nestjs/testing": "^7.6.5",
+    "@types/express": "^4.17.9",
+    "@types/hapi__joi": "^16.0.12",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.39",
+    "@types/rx": "^4.1.1",
+    "@types/supertest": "^2.0.9",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.19.1",
+    "jest": "^25.4.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "25.4.0",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^8.6.0",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.4",
+    "validate-commit": "^3.4.0",
+    "husky": "^4.3.6",
+    "cz-conventional-changelog": "^3.1.0",
+    "commitizen": "^4.2.2",
+    "standard-version": "^9.1.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": ".",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "./coverage",
+    "collectCoverageFrom": [
+      "./src/**/*.ts",
+      "!./src/config/*.ts",
+      "!./src/main.ts",
+      "!**/node_modules/**",
+      "!**/dist/**"
+    ],
+    "testEnvironment": "node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yosama/nerdsletter-subscription.git"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "validate-commit-msg",
+      "pre-push": "npm run test:cov && npm run lint"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
