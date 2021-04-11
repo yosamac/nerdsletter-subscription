@@ -80,4 +80,23 @@ export class SubscriptionService {
             })
         );
     }
+
+    deleteSubscription(id: string): Observable<any> {
+        this.logger.info(`Deleting subscription: ${id}`);
+
+        return this.getSubscription(id).pipe(
+                map(doc => {
+                    from(this.daoService.deleteOne(doc.id)).subscribe();
+                    this.emailService.sendEmail(doc);
+                    return undefined;
+                }),
+                catchError(err => {
+                    this.logger.error(err.message);
+                    return handleError(this.logger)({
+                        code: ServiceExceptionStatus.NOT_FOUND,
+                        details: 'Subscription not found'
+                    });
+                })
+        );
+    }
 }

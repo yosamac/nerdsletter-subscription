@@ -4,7 +4,7 @@ export const emailRegistered = 'valid@email.com';
 export const validNewsletterId = 'validNerdsLetter';
 
 export const validSubscriptionId = 'validSubscriptionId';
-const validSubscription = {
+export const validSubscription = {
     id: validSubscriptionId,
     email: 'yos@nerdsletter.com',
     dateOfBirth: '1990-08-24',
@@ -12,7 +12,6 @@ const validSubscription = {
     newsletterId: 'campaign-1',
     firstName: 'Yosnier',
     gender: 'MALE',
-    createAt: Date.now()
 };
 
 export class DaoServiceMock {
@@ -33,5 +32,11 @@ export class DaoServiceMock {
         return id == validSubscriptionId
             ? of(validSubscription)
             : of(null);
+    }
+
+    deleteOne(id: string) {
+        return id == validSubscriptionId
+            ? of({ deletedCount: 1, ok:1, n: 1 })
+            : of({ deletedCount: 0, ok:1, n: 0 });
     }
 }

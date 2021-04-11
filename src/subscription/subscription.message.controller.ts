@@ -28,4 +28,10 @@ export class SubscriptionMessageController {
     getSubscription(data: any): Observable<any> {
         return this.subscriptionService.getSubscription(data.id);
     }
+
+    @MessagePattern({ cmd: 'cancelSubscription' })
+    @UsePipes(SubscriptionIdPipe)
+    cancelSubscription(data: any): Observable<any> {
+        return this.subscriptionService.deleteSubscription(data.id);
+    }
 }

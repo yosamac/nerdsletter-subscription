@@ -24,4 +24,8 @@ export class DaoService {
     findOne(id:string): Promise<Subscription> {
         return this.subscriptionModel.findById(id).exec();
     }
+
+    deleteOne(id:string): Promise<any> {
+        return this.subscriptionModel.deleteOne({ _id: id }).exec();
+    }
 }
