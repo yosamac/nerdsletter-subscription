@@ -42,7 +42,7 @@ npm start start:dev
 | EMAIL_MESH_HOST         | EMAIL SERVICE TCP host                     | `0.0.0.0`                                    |
 | EMAIL_MESH_PORT         | EMAIL SERVICE TCP port                     | `4002`                                       |
 | **Database section**                                                                                              |||
-| MONGODB_URI             | Connection database                        | `mongodb://localhostnerdsletter_subscription`|
+| MONGODB_URI             | Connection database                        | `mongodb://localhost/nerdsletter_subscription`|
 
 
 ## Running the tests

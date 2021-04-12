@@ -39,12 +39,13 @@ COPY --from=build /nerdsletter/prod_node_modules ./node_modules
 # copy app sources
 COPY --from=build /nerdsletter/dist .
 
-EXPOSE 3000
+EXPOSE 4001
 
 # Log debugging variables
 ENV LOG_LEVEL DEBUG
 ENV NODE_ENV production
-ENV API_PORT 3000
+ENV MESH_PORT 4001
+
 
 CMD ["tini", "node", "--optimize_for_size", "main.js"]
 
