@@ -32,7 +32,11 @@ export class SubscriptionService {
         return res.pipe(
             map(newSubscription => {
 
-                this.emailService.sendEmail(newSubscription);
+                this.emailService.sendEmail({
+                    dto: toSubscriptionDTO(newSubscription),
+                    template: 'WELCOME',
+                    eventType:'subscription_created'
+                });
 
                 return toSubscriptionDTO(newSubscription);
             }),
@@ -87,7 +91,11 @@ export class SubscriptionService {
         return this.getSubscription(id).pipe(
                 map(doc => {
                     from(this.daoService.deleteOne(doc.id)).subscribe();
-                    this.emailService.sendEmail(doc);
+                    this.emailService.sendEmail({
+                        dto: toSubscriptionDTO(doc),
+                        template: 'GOODBYE',
+                        eventType:'subscription_canceled'
+                    });
                     return undefined;
                 }),
                 catchError(err => {

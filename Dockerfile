@@ -1,5 +1,5 @@
 ##################
-# Public service #
+# Subscription service #
 ##################
 
 #

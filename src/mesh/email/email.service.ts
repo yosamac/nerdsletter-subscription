@@ -13,17 +13,15 @@ export class EmailMeshService {
     ) {}
 
     sendEmail(data: any): Promise<any> {
-
         const mailData: any = {
-            to: data.email,
-            metadata: {
-                gender: data.gender,
-                dateOfBirth: data.dateOfBirth
-            }
+            to: data.dto.email,
+            template: data.template,
+            eventType: data.eventType,
+            metadata: { ...data.dto }
         };
 
-        return this.emailClient.emit<any>(
-            { cmd: 'subscription_created' },
+        return this.emailClient.send<any>(
+            { cmd: 'sendMail' },
             { ...mailData }
         ).toPromise().catch(err => {
             this.logger.error(err);
