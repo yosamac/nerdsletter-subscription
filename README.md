@@ -90,7 +90,7 @@ docker-compose up nerdsletter-subscription
 ```
 
 ### Docker hub repository
-[Nerdsletter repository](https://hub.docker.com/repository/docker/yosama/nerdsletter-public)
+[Nerdsletter repository](https://hub.docker.com/repository/docker/yosama/nerdsletter-subscription)
 
 
 ## License
