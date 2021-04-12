@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { of, from } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { MainModule } from '../../src/main.module';
@@ -149,7 +149,7 @@ describe('SubscriptionService', () => {
                 // expect(senEmailSpy).toHaveBeenCalledWith(validSubscription);
                 // senEmailSpy.mockRestore();
                 done();
-            });
+            })
         });
     });
 });
