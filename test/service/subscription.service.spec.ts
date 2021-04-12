@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { of } from 'rxjs';
+import { of, from } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { MainModule } from '../../src/main.module';
@@ -29,7 +29,7 @@ export const envs = {
     NODE_ENV: 'development'
 };
 
-describe('subscriptionService', () => {
+describe('SubscriptionService', () => {
     let subscriptionService: SubscriptionService;
     let emailService: EmailServiceMock;
 
